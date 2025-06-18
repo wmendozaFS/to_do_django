@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 from . import views
 
 # namespace
@@ -13,12 +13,11 @@ urlpatterns = [
     path('', views.task_list, name='task_list'),
 
     # Recuperar un objeto tarea individual
-    path('<int:pk>/', views.task_detail, name='task_detail'),
+    re_path(r'^(?P<pk>\d+)/$', views.task_detail, name='task_detail'),
 
     # Actualizar una tarea
-    path('<int:pk>/update/', views.task_update, name='task_update'),
+    re_path(r'^(?P<pk>\d+)/update/$', views.task_update, name='task_update'),
 
     # Eliminar una tarea
-    path('<int:pk>/delete/', views.task_delete, name='task_delete'),
-
+    re_path(r'^(?P<pk>\d+)/delete/$', views.task_delete, name='task_delete'),
 ]
